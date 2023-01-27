@@ -34,8 +34,8 @@ function _atoi(char_slice::AbstractVector{UInt8})
 end
 
 @inline function _process_result(numby::numberScan, from::Int64, to::Int64)
-    to == 0 && return _atoi(view(numby.arr, from:sizeof(numby.arr))), sizeof(numby.arr)
-    return _atoi(view(numby.arr, from:to-1)), to + 1 
+    to == 0 && return @inbounds _atoi(view(numby.arr, from:sizeof(numby.arr))), sizeof(numby.arr)
+    return @inbounds _atoi(view(numby.arr, from:to-1)), to + 1 
 end
 
 @inline function Base.iterate(numby::numberScan)
@@ -51,8 +51,3 @@ end
     pos = _memchr(numby.arr, UInt8(numby.del), from_index=state)
     return _process_result(numby, state, pos)
 end
-
-
-
-
-
