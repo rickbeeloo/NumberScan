@@ -32,6 +32,6 @@ targets = Set([100, 200, 300, 1000])
 ```
 
 ---
-###TODO
+### TODO
 - Make this more general, like keep iterating till numbers are found. Such that you don't have to check for `number != 0`. Perhaps also make this work without delimiter
 - Maybe some basic saftey checks
