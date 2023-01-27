@@ -2,3 +2,6 @@ name = "NumberScan"
 uuid = "24dcc99f-3f51-47fc-9e8b-e3588f4e7dd4"
 authors = ["codegodz <biobeeloo@gmail.com>"]
 version = "0.1.0"
+
+[deps]
+Mmap = "a63ad114-7e13-5084-954f-fe012c677804"
