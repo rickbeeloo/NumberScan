@@ -13,7 +13,7 @@ function mmapScan(f::String, del::Char)
     return numberScan(map_vect, del)
 end
 
-function _memchr(mem::Vector{UInt8}, byte::UInt8 ; from_index::Int64 = 1)
+function _memchr(mem::AbstractVector{UInt8}, byte::UInt8 ; from_index::Int64 = 1)
     # Similar to findnext, however we skip some safety checks here to speed this up
     # memchar function in C can scan a memory block (in bytes) for a specific byte
     # it does this from a starting location (mem_start_at) and scans the next X, bytes
