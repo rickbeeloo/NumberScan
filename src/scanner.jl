@@ -23,7 +23,7 @@ function _memchr(mem::AbstractVector{UInt8}, byte::UInt8 ; from_index::Int64 = 1
     mem_start_at = p + from_index - 1
     mem_bytes_left = mem_size-from_index+1
     q = GC.@preserve mem @ccall memchr(mem_start_at::Ptr{UInt8}, byte::Cint, mem_bytes_left::Csize_t)::Ptr{Cchar}
-    # Using % to type convert is unsafe, but it will save some instructions again :)
+    # Using % to type convert is unsafe, but since we now our input is safe this will save some instructions again :)
     return q == C_NULL ? 0 : (q % Int64) - (p % Int64) + Int64(1)
 end
 
