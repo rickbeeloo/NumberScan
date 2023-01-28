@@ -56,10 +56,12 @@ function benchmark1()
 end
 
 function benchmark2() 
-    s = "Some test string with 100 and 100 other 300 numbers"
+
+    s = "Some test string with 100 and 100 other 40000000000000 numbers"
     x = Vector{UInt8}(s)
 
-    @btime for number in numberScan($x, ' ')
+    for number in numberScan(x, ' ')
+        println(number)
     end
 
     j = 1
