@@ -1,6 +1,8 @@
 ## Numby - Int scan over contaminated bytes
 Just for own usage now as this is not developed at all. I use C's [memchr](https://cplusplus.com/reference/cstring/memchr/ "memchr") to search a byte block for a specific byte. In this case a delimiter. This is similar to [findfirst](https://github.com/JuliaLang/julia/blob/master/base/strings/search.jl#L15 "findfirst"), but then without safety checks for speed.  Then we can give our best shot to extract the integer using C's[ atoi](https://cplusplus.com/reference/cstdlib/atoi/?kw=atoi " atoi"). Unlike Julias base parse this can deal with messy "strings" (actually bytes) like "300++" or "+300messy". 
 
+This is around 2x faster when parsing numbers from a file and 5x faster when parsing from an existing `UInt8` vector (see [benchmark scripts](https://github.com/rickbeeloo/NumberScan/blob/master/src/tests.jl))
+
 `add https://github.com/rickbeeloo/NumberScan`
 
 **Note**

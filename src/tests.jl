@@ -26,7 +26,7 @@ end
 
 
 
-function benchmark() 
+function benchmark1() 
     # Generate test data 
     #gen_test_file(100_000)
     f  = "data/test.txt"
@@ -53,12 +53,23 @@ function benchmark()
         $pre[$j] = number
         $j +=1
     end
+end
 
+function benchmark2() 
+    s = "Some test string with 100 and 100 other 300 numbers"
+    x = Vector{UInt8}(s)
 
-    
+    @btime for number in numberScan($x, ' ')
+    end
 
+    j = 1
+    @btime for item in split($s, " ")
+        if isdigit(item[1])
+            number = parse(Int64, item)
+        end
+    end
 
 
 end
 
-benchmark()
+benchmark2()
