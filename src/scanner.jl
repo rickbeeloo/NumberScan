@@ -24,7 +24,9 @@ function _memchr(mem::AbstractVector{UInt8}, byte::UInt8 ; from_index::Int64 = 1
     mem_bytes_left = mem_size-from_index+1
     q = GC.@preserve mem @ccall memchr(mem_start_at::Ptr{UInt8}, byte::Cint, mem_bytes_left::Csize_t)::Ptr{Cchar}
     # Using % to type convert is unsafe, but since we now our input is safe this will save some instructions again :)
-    return q == C_NULL ? 0 : (q % Int64) - (p % Int64) + Int64(1)
+    # maybe for now keep this save but we can change it back:
+    # (q % Int64) - (p % Int64) + Int64(1)
+    return q == C_NULL ? Int64(0) : Int64(q - p + 1)
 end
 
 function _atoi(char_slice::AbstractVector{UInt8})
@@ -51,10 +53,4 @@ end
     # memchr pointer in memchr
     pos = _memchr(numby.arr, UInt8(numby.del), from_index=state)
     return _process_result(numby, state, pos)
-end
-
-function m() 
-    for x in mmapScan(Vector{UInt8}("test"), ' ')
-        println(x)
-    end
 end
